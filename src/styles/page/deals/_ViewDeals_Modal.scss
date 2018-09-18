@@ -1,0 +1,244 @@
+.modal {
+  width: 90% !important;
+  max-width: 800px !important;
+  padding: 0 !important;
+  background: rgba(0,0,0,0) !important;
+  border-style: none !important;
+
+  .modal-scroll {
+    overflow: scroll;
+    background: rgba(0,0,0,0);
+    display: flex;
+    height: 100vh;
+
+    .item-topbar {
+      display: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      .appbar {
+        background-color: #fff;
+        .text {
+          padding-left: 0;
+        }
+      }
+    }
+
+    .bottom-Appbar {
+      display: none;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .popup {
+      position: relative;
+      width: 100%;
+      margin: auto;
+
+      .modal-close-btn {
+        position: absolute;
+        right: 0;
+      }
+
+      .modal-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 48px 1rem 1.4rem;
+        background-color: #fff;
+        border-radius: 20px;
+
+        .deal-display {
+          width: 40%;
+          padding-top: 20px;
+          display: flex;
+          flex-direction: column;
+          .img-crop {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 240px;
+            width: 240px;
+            margin: 0 auto;
+            overflow: hidden;
+            .modal-img {
+              max-width: 10%;
+              max-height: 10%;
+              transform: scale(10);
+              border-radius: 1.5px;
+            }                      
+          }
+          .chip-wrapper {
+            display: flex;
+            justify-content: center;
+            .chip {
+              margin: 1rem 0.5rem 0;
+            }
+          }
+          .modal-title {
+            margin: 1rem 1rem 0;
+            text-align: center;
+          }
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          width: 55%;
+          margin-left: auto;
+          .top-info {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 13px;
+            margin-bottom: 13px;
+            .grid-item {
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1 !important;
+              border-right: 1px solid #ddd;
+              &:last-child {
+                border-style: none;
+              }
+              .label, .value {
+                margin: auto;
+              }
+            }
+          }
+          .details {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 13px;
+            margin-bottom: 13px;
+
+            .label {
+              margin-bottom: 10px;
+            }
+
+            .grid-item {
+              display: flex;
+              flex-wrap: nowrap;
+              padding: 6px 0;
+              .gd {
+                margin-left: 16px;
+              }
+            }
+          }
+          .reason-info {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 13px;
+            margin-bottom: 13px;
+            .value {
+              margin-left: 16px;
+            }
+          }
+          .bottom {
+            margin-bottom: 10px;
+            .label {
+              margin-bottom: 10px;
+            }
+          }
+          .modal-buttons {
+            margin-left: auto;
+            margin-top: auto;
+            button {
+              width: 85px;
+              height: 30px;
+              margin-left: 30px;
+            }
+            &.hidden {
+              display: none;
+            }
+          }
+        }
+        .lg {
+          font-size: 1.7em;
+          font-family: $ms-font700;
+        }
+
+        .md {
+          font-size: 1.2em;
+          font-family: $ms-font300;
+        }
+
+        .sm {
+          font-size: 1.1em;
+          font-family: $ms-font300;
+        }
+      }
+    }
+  }
+
+  @include tablet_max {
+    max-width: 500px !important;
+
+    .modal-scroll {
+      .popup {
+        .modal-container {
+          flex-direction: column;
+          padding-left: 2rem;
+          padding-right: 2rem;
+
+          .deal-display {
+            width: 100%;
+            padding-top: 0;
+            .modal-title {
+              margin: 0.6rem 0 0.4rem;
+            }
+            .chip-wrapper {
+              .chip {
+                margin: 0 0.5rem 0.4rem;
+              }
+            }
+          }
+          .info {
+            width: 100%;
+          }
+          .web-ft {
+            display: none;
+          }
+
+          .lg {
+            font-size: 1.6em;
+          }
+        }
+      }
+    }
+  }
+
+  @include flexScale(0,500px) {
+    width: 100vw !important;
+    .modal-scroll {
+      padding-bottom: 0;
+      .item-topbar {
+        display: block;
+      }
+      .bottom-Appbar {
+        display: block;
+      }
+      .popup {
+        padding-bottom: 0;
+        margin: 0;
+        .modal-close-btn {
+          display: none;
+        }
+        .modal-container {
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          height: auto;
+          margin: 40px 0 0;
+          padding-bottom: 112px;
+          padding-top: 56px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          .info {
+            .modal-buttons {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

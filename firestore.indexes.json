@@ -1,0 +1,40 @@
+{
+  "indexes": [
+    {
+      "collectionId": "orders",
+      "state": "READY",
+      "fields": [
+        {
+          "fieldPath": "buyerUID",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "mode": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionId": "orders",
+      "state": "READY",
+      "fields": [
+        {
+          "fieldPath": "sellerUID",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "mode": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}

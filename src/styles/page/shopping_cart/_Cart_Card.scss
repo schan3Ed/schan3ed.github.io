@@ -1,0 +1,341 @@
+.card-wrapper {
+    margin: 0 10px 8px;
+    .card-container {
+        background: #fff;
+        border-radius: 10px;
+    }
+    .card-cart {
+        display: flex;
+        align-items: center;
+        margin: 0 auto 0 auto;
+        margin-left: auto;
+        padding: 0;
+        border-radius: 10px !important;
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 107px;
+            min-width: 107px;
+            margin: auto 8px;
+            .image-floater {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 90%;
+                min-width: 90%;
+                overflow: hidden;
+                border-radius: 10px;
+                .card-image {
+                    max-width: 10%;
+                    max-height: 10%;
+                    transform: scale(10);
+                }
+            }
+        }
+        .info-section {
+            display: flex;
+            flex-grow: 1;
+            margin-top: 5px;
+            .major-text {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: row;
+                padding: 0 0 0 10px;
+                margin: 15px 0;
+                .card-name-container {
+                    padding: 0 10px;
+                    flex-grow: 1;
+                    .name {
+                        margin-bottom: auto;
+                        font-family: $ms-font700;
+                    }
+                    .label {
+                        font-size: 1.1em;
+                        line-height: 16px !important;
+                        text-decoration: underline;
+                        margin-bottom: 10px;
+                    }
+                    @include flexScale(768px, 820px) {
+                        .name {
+                            font-size: 1.0em;
+                        }
+                        .label {
+                            font-size: 1.1em;
+                        }
+                    }
+                }
+                .card-info-container {
+                    display: flex;
+                    flex-direction: column;
+                    border-right: 1px solid #ddd;
+                    border-left: 1px solid #ddd;
+                    padding: 0 10px;
+                    min-width: 200px;
+                    .subinfo {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        .value {
+                            margin-left: auto;
+                        }
+                    }
+                }
+                .sm {
+                    font-size: 1em;
+                    font-family: $ms-font300;
+                }
+                .lg {
+                    font-size: 1.4em;
+                }
+            }
+            .minor-text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                border-right: none;
+                padding: 0 10px;
+                margin: 15px 0;
+                min-width: 97px;
+                .md {
+                    font-size: 1.4em;
+                }
+                .price-container {
+                    display: flex;
+                    flex-direction: row;
+                    margin-right: 10px;
+                    .price {
+                        font-family: $ms-font500;
+                    }
+                    .label {
+                        margin-left: 3px;
+                        font-family: $ms-font300;
+                    }
+                }
+                .detail-container {
+                    display: flex;
+                    flex-direction: row;
+                    .label {
+                        font-family: $ms-font300;
+                        font-size: 1.1em;
+                        color: $opposite-main;
+                        &.divider {
+                            margin-left: 0;
+                        }
+                        &.hidden {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .card-actions {
+                margin-left: auto;
+                padding: 0 8px;
+                .details-btn {
+                    padding: 0;
+                    min-height: 30px;
+                    min-width: 75px;
+                    background-color: $spearmint-main;
+                    text-transform: none;
+                    .MuiButton-label-2 {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+        }
+        .mobil-ft {
+            display: none !important;
+        } //Breakpoints
+        //Tablet and lower
+        @include tablet_max {
+            cursor: pointer;
+            .image-container {
+                margin: 10px auto auto;
+                height: 100px;
+                min-width: 100px;
+                border-radius: 0;
+                .image-floater {
+                    height: 90%;
+                    min-width: 90%;
+                    .card-image {
+                        max-width: 10%;
+                        max-height: 10%;
+                        transform: scale(10);
+                    }
+                }
+            }
+            .info-section {
+                flex-wrap: wrap;
+                margin-right: 10px;
+                margin-left: 10px;
+                .major-text {
+                    width: 100%;
+                    padding: 0;
+                    flex-direction: column;
+                    border-style: none;
+                    margin: 0;
+                    margin-top: 10px;
+                    .card-name-container {
+                        display: block;
+                        border-style: none;
+                        padding: 0;
+                        margin-left: 10px;
+                        .name {
+                            margin-bottom: 4px;
+                        }
+                        .label {
+                            font-size: 1em;
+                            margin-bottom: 1px;
+                            text-decoration: none;
+                        }
+                    }
+                    .card-info-container {
+                        flex-direction: column;
+                        justify-content: space-between;
+                        max-width: 270px;
+                        border-style: none;
+                        .subinfo {
+                            display: flex;
+                            flex-wrap: nowrap;
+                            min-width: 70px;
+                            .value {
+                                margin-left: 1.2rem;
+                            }
+                        }
+                    }
+                    .lg {
+                        font-size: 1.3em;
+                    }
+                    .sm {
+                        font-size: 1em;
+                    }
+                }
+                .minor-text {
+                    display: flex;
+                    flex-direction: row-reverse;
+                    flex-grow: 1;
+                    justify-content: space-between;
+                    padding: 0;
+                    border-style: none;
+                    margin: 0;
+                    .md {
+                        font-size: 1.2em;
+                    }
+                    .price-container {
+                        .price {
+                            font-family: $ms-font500;
+                        }
+                        .label {
+                            margin-left: 3px;
+                            font-family: $ms-font300;
+                        }
+                    }
+                    .detail-container {
+                        .label {
+                            font-size: 0.9em;
+                        }
+                    }
+                    .label {
+                        margin-left: 8px;
+                    }
+                }
+                .card-actions {
+                    margin-left: 0;
+                    margin-left: auto;
+                    padding: 0;
+                    .details-btn {
+                        min-height: 30px;
+                        min-width: 70px;
+                        margin: 6px 0;
+                        .MuiButton-label-2 {
+                            font-size: 0.85em;
+                        }
+                    }
+                }
+                .subinfo {
+                    font-size: 0.9em;
+                }
+                @include flexScale(0, 462px) {
+                    margin-left: 0;
+                    .major-text {
+                        .lg {
+                            font-size: 1.1em;
+                        }
+                    }
+                }
+            }
+            .web-ft {
+                display: none !important;
+            }
+            .mobil-ft {
+                display: block;
+            }
+        } //Mobile and lower
+        @include mobile_max {
+            .image-container {
+                margin: 10px auto auto;
+                border-radius: 0;
+                .image-floater {
+                    .card-image {
+                        max-width: 10%;
+                        max-height: 10%;
+                        transform: scale(10);
+                    }
+                }
+            }
+            .info-section {
+                .major-text {
+                    .card-name-container {
+                        padding-left: 0px;
+                        margin-left: 4px;
+                        .name {
+                            margin-bottom: 2px;
+                        }
+                    }
+                    .card-info-container {
+                        max-width: 200px;
+                        padding-left: 4px;
+                        .subinfo {
+                            min-width: 80px;
+                            .label,
+                            .value {
+                                font-size: 0.85em;
+                            }
+                            .value {
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                }
+                .minor-text {
+                    .price,
+                    .label {
+                        font-size: 1.1em;
+                    }
+                    .label {
+                        margin-right: 4px;
+                    }
+                }
+                .card-actions {
+                    .details-btn {
+                        min-height: 25px;
+                        min-width: 70px;
+                        .MuiButton-label-2 {
+                            font-size: 0.7em;
+                        }
+                    }
+                }
+            }
+        }
+        .label {
+            color: $spearmint-main;
+        }
+    }
+    @include mobile_max {
+        margin: 0 0 8px;
+        .card-container {
+            background: #fff;
+            border-radius: 0;
+        }
+    }
+}

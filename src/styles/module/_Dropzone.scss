@@ -1,0 +1,70 @@
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    max-width: 300px;
+    max-height: 300px;
+    min-width: 230px;
+    min-height: 230px;
+    height: auto;
+    width: 25vw;
+    .drop-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F5F5F5;
+        margin-bottom: 4px;
+        max-width: 300px;
+        max-height: 300px;
+        min-width: 230px;
+        min-height: 230px;
+        height: 25vw;
+        width: 25vw;
+        overflow: hidden;
+        .placeholder {
+            position: absolute;
+            opacity: 0.3;
+            text-align: center;
+            .splash-icon {
+                font-size: 70px;
+            }
+            .splash-text {
+                font-size: 1em;
+            }
+            &.hidden {
+                display: none;
+            }
+        }
+        .drop-img {
+            max-width: 10%;
+            max-height: 10%;
+            transform: scale(10);
+        }
+        .drop-clear-button {
+            position: absolute;
+            color: #fff;
+            bottom: 0;
+            right: 0;
+            max-width: 40px;
+            min-width: 40px;
+            max-height: 30px;
+            min-height: 30px;
+            padding: 0;
+            box-shadow: none;
+            .icon {
+                font-size: 20px;
+            }
+            &.hidden {
+                display: none;
+            }
+        }				
+    }
+    .drop-open-button {
+        max-height: 30px;
+        min-height: 30px;
+        padding: 0 8px;
+        margin: auto;
+        text-transform: none;
+    }
+
+}

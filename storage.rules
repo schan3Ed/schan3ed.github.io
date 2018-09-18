@@ -1,0 +1,15 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /deal_pictures/{pictureID} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+    match /profile_pictures/{pictureID} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+  }
+}
+

@@ -1,0 +1,125 @@
+@import './../../helper/_mixins.scss';
+@import '_Request_Modal.scss';
+@import '_Request_Card.scss';
+@import '_Request_Author.scss';
+$border-color: rgba(61, 210, 143, 0.123);
+.request-container {
+    font-family: 'MuseoSans300', 'sans-serif';
+    display: flex;
+    flex-direction: column;
+    background-size: auto;
+    width: 100%;
+    @include sideBar;
+    margin-top: 112px;
+    @include flexScale(0, 549px) {
+        margin-top: 104px;
+        margin-bottom: 60px;
+    }
+    > div {
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: 40px;
+    }
+}
+
+.request-list {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 60px;
+    width: 100%;
+    margin-top: 1%;
+    flex-wrap: wrap;
+    .empty-text {
+        display: flex;
+        width: 100%;
+        .text {
+          margin: auto;
+            opacity: 0.6;
+            margin-top: 100px;
+            @include mobile_max {
+                font-size: 1.5em;
+                margin-top: 40px;
+            }
+        }
+    }
+    .panel {
+        box-shadow: none;
+        .table-summary {
+            margin: 0;
+            border-bottom: 3px solid $spearmint-main;
+        }
+        .panel-buttons {
+            background-color: $border-color;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            .pagination{
+                margin-top: 15px;
+            }
+            .buttons-container {
+                display: flex;
+                justify-content: flex-end;
+                margin-left: auto;
+                .button {
+                    margin-left: 8px;
+                    padding-top: 5px;
+                    text-transform: none;
+                }
+            }
+        }
+    }
+    .product-list {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        background-color: $border-color;
+        .request-label{
+            background: $spearmint-main;
+            .text{
+                color:#fff;
+                text-align: center;
+                font-size: 1.3em;
+            }
+        }
+        .panel-wrapper {
+            margin: 0 10px 8px;
+            .panel-container {
+                background: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+        }
+        
+        @include tablet_max {
+            .request-label{
+                background: $spearmint-main;
+                .text{
+                    color:#fff;
+                    text-align: center;
+                    font-size: 1.1em;
+                }
+            }
+        }
+        @include mobile_max {
+            .panel-wrapper {
+                margin: 0 0 8px;
+                .panel-container {
+                    background: #fff;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+    .mobil-ft {
+        display: none;
+    }
+    @include tablet_max {
+        .mobil-ft {
+            display: flex;
+        }
+    }
+}

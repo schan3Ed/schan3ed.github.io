@@ -1,0 +1,204 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	// TODO: specify what fields are allowed.
+  	// Businesses: Anyone can see their information, but only
+  	// the authorized user can create/update information. Only
+  	// admins can delete a business.
+  	match /businesses/{uid} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['city', 'closing', 'communicationOptions', 'description', 'email', 'foodOptions', 'name', 'opening', 'paymentOptions', 'phone', 'state', 'streetAddress', 'zipcode'])
+                  && request.resource.data.city is string
+                  && request.resource.data.closing is string
+                  && request.resource.data.communicationOptions is list
+                  && request.resource.data.description is string
+                  && request.resource.data.email is string
+                  && request.resource.data.foodOptions is list
+                  && request.resource.data.name is string
+                  && request.resource.data.opening is string
+                  && request.resource.data.paymentOptions is list
+                  && request.resource.data.phone is string
+                  && request.resource.data.state is string
+                  && request.resource.data.streetAddress is string
+                  && request.resource.data.zipcode is string
+                  && (!(request.resource.data.keys().hasAll(['picture'])) || request.resource.data.picture is string);
+      }
+    	allow read: if request.auth.uid != null;
+      allow create, update: if request.auth.uid == uid && isValid();
+      allow delete: if false;
+
+    }
+    // Client relationships: Users can only view
+    // information if they are part of that client relationship, either as a buyer
+    // or seller. Thus, be sure to limit queries as so.
+    // Only buyers/sellers can create/update the information, and if they 
+    // update the info, they cannot change who the buyer/seller is.
+    match /client_relationships/{relationshipID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['buyerUID', 'sellerUID'])
+        				&& request.resource.data.buyerUID is string
+                && request.resource.data.sellerUID is string;
+      }
+      allow list, get: if resource.data.buyerUID == request.auth.uid || resource.data.sellerUID == request.auth.uid;
+      allow create: if isValid() && (request.resource.data.buyerUID == request.auth.uid || request.resource.data.sellerUID == request.auth.uid);
+      allow update: if false; //(request.resource.data.buyerUID == request.auth.uid || request.resource.data.sellerUID == request.auth.uid) && (resource.data.buyerUID == request.auth.uid || resource.data.sellerUID == request.auth.uid);
+      allow delete: if request.resource.data.buyerUID == request.auth.uid || request.resource.data.sellerUID == request.auth.uid;
+    }
+    // Deal pictures: anyone can see the pictures or create them (this needs to be changed)
+    // No one can update or delete them.
+    match /deal_pictures/{pictureID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['url'])
+        				&& request.resource.data.url is string;
+      }
+    	allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null && isValid();
+      allow update, delete: if false;
+    }
+    // Deals: Anyone can read a deal (no client list check)
+    // Updates do not allow the owner of the deal to change
+    match /deals/{dealID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['archived', 'currentVersion', 'timestamp', 'uid'])
+        				&& request.resource.data.archived is bool
+                && request.resource.data.currentVersion is int
+   	            && request.resource.data.currentVersion >= 0
+								&& request.resource.data.timestamp is int
+                && request.resource.data.uid is string;
+      }
+      allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid == request.resource.data.uid && isValid() && request.resource.data.currentVersion == 0;
+      allow update: if request.auth.uid == resource.data.uid 
+      								&& resource.data.uid == request.resource.data.uid 
+                      && isValid() 
+                      && (request.resource.data.archived || request.resource.data.currentVersion == resource.data.currentVersion + 1)
+                      && (!request.resource.data.archived || request.resource.data.currentVersion == resource.data.currentVersion);
+      allow delete: if false;
+      
+    	match /versions/{versionNo} {
+      	function isValid() {
+        	return request.resource.data.keys().hasAll(['delivery', 'foodOption', 'isLocallyGrown', 'isOrganic', 'name', 'notes', 'pickup', 'price', 'priceUnit', 'public', 'quantity', 'quantityUnit', 'reasonForPost', 'useByDate'])
+          				&& request.resource.data.delivery is bool
+                  && request.resource.data.foodOption is string
+                  && request.resource.data.isLocallyGrown is bool
+                  && request.resource.data.isOrganic is bool
+                  && request.resource.data.name is string
+                  && (request.resource.data.notes == null || request.resource.data.notes is string)
+                  && request.resource.data.pickup is bool
+                  && (!(request.resource.data.keys().hasAll(['pictures'])) || request.resource.data.pictures is list)
+                  && request.resource.data.price is number
+                  && request.resource.data.priceUnit is string
+                  && request.resource.data.public is bool
+                  && request.resource.data.quantity is int
+                  && (!request.resource.data.reasonForPost || request.resource.data.reasonForPost is list)
+                  && request.resource.data.useByDate is string;
+        }
+      	allow read: if request.auth.uid != null;
+        allow create: if get(/databases/$(database)/documents/deals/$(dealID)).data.uid == request.auth.uid && isValid();
+        allow update, delete: if false;
+      }
+
+    }
+    
+    // Anyone can report an error, only admins can read/update/delete them
+    match /errors/{errorID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['uid', 'message', 'stack', 'info', 'timestamp'])
+        				&& request.resource.data.uid is string
+                && request.resource.data.message is string
+                && request.resource.data.stack is string
+                && request.resource.data.info is string
+                && request.resource.data.timestamp is int;
+      }
+    	allow create: if request.auth.uid != null && isValid();
+      allow read, update, delete: if false;
+    }
+    
+    // Order Bundles: Users can only get a bundle if their UID is listed as a buyer
+    // or seller for that order bundle.
+    // Only buyers can create/update an order bundle. There is no need for sellers to update an order
+    // bundle if something about an order changes.
+    match /order_bundles/{bundleID} {
+			function isValid() {
+      	return request.resource.data.keys().hasAll(['buyerUID', 'orders', 'sellerUID', 'timestamp', 'totalCost'])
+        				&& request.resource.data.buyerUID is string
+                && request.resource.data.orders is list
+                && request.resource.data.sellerUID is string
+                && request.resource.data.timestamp is int
+                && request.resource.data.totalCost is number;
+      }
+      allow list, get: if resource.data.buyerUID == request.auth.uid || resource.data.sellerUID == request.auth.uid;
+      allow create: if request.auth.uid == request.resource.data.buyerUID && isValid();
+      allow update: if request.auth.uid == resource.data.buyerUID && resource.data.buyerUID == request.resource.data.buyerUID && resource.data.sellerUID == request.resource.data.sellerUID && isValid();
+      allow delete: if false;
+    }
+    
+    // Orders: Only listed buyers/sellers can view an order.
+    // Only buyers can create an order, but sellers and buyers can both update an order if something
+    // changes.  They are not allowed to change who the buyer/seller is.
+    match /orders/{orderID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['buyerUID', 'dealID', 'dealVersion', 'exchange', 'exchangeStatus', 'needByDate', 'paymentStatus', 'quantityRequested', 'sellerUID', 'status', 'timestamp', 'totalCost'])
+        				&& request.resource.data.buyerUID is string
+                && request.resource.data.dealID is string
+                && request.resource.data.dealVersion is int
+                && request.resource.data.exchange is string
+                && request.resource.data.exchangeStatus is bool
+                && request.resource.data.needByDate is string
+                && request.resource.data.paymentStatus is bool
+                && request.resource.data.quantityRequested is int
+                && request.resource.data.sellerUID is string
+                && request.resource.data.status is string
+                && request.resource.data.timestamp is int
+                && request.resource.data.totalCost is number;
+      }
+      allow list, get: if resource.data.buyerUID == request.auth.uid || resource.data.sellerUID == request.auth.uid;
+      allow create: if request.auth.uid == request.resource.data.buyerUID && isValid();
+      allow update: if (request.auth.uid == resource.data.buyerUID || request.auth.uid == resource.data.sellerUID) && resource.data.buyerUID == request.resource.data.buyerUID && resource.data.sellerUID == request.resource.data.sellerUID && isValid();
+      allow delete: if false;
+    }
+    
+    match /profile_pictures/{pictureID} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['url'])
+        				&& request.resource.data.url is string;
+      }
+    	allow read: if request.auth.uid != null;
+      allow create: if request.auth.uid != null && isValid();
+      allow update, delete: if false;
+    }
+    
+    // Only the user themself can update their session data
+    // Users can delete their notifications
+    match /sessions/{uid} {
+    	allow read, update, create: if request.auth.uid == uid;
+      allow delete: if false;
+    	
+      match /notifications/{notificationID} {
+      	function isValid() {
+        	return request.resource.data.keys().hasAll(['link', 'message', 'pictureURL', 'subject', 'timestamp'])
+          				&& request.resource.data.link is string
+                  && request.resource.data.message is string
+                  && request.resource.data.pictureURL is string
+                  && request.resource.data.subject is string
+                  && request.resource.data.timestamp is int;
+        }
+      	allow read, delete: if request.auth.uid == uid;
+        allow create, update: if request.auth.uid == uid && isValid();
+    	}
+    }
+    // Users: Only the user themself can read/create/update their data
+    match /users/{uid} {
+    	function isValid() {
+      	return request.resource.data.keys().hasAll(['email', 'initialized', 'firstName', 'lastName', 'type'])
+        				&& request.resource.data.email is string
+                && request.resource.data.initialized is bool
+                && request.resource.data.firstName is string
+                && request.resource.data.lastName is string
+                && request.resource.data.type is string;
+      }
+    	allow read: if request.auth.uid == uid;
+      allow create, update: if request.auth.uid == uid && isValid();
+      allow delete: if false;
+    }
+  }
+}

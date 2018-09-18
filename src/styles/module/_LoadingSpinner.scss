@@ -1,0 +1,15 @@
+@import '../helper/_mixins.scss';
+
+.loading-spin-wrapper{
+    margin: auto;
+    .loading-spin-page{
+        position: relative;
+        top: -130px;
+        @include tablet_max {
+            top: -100px;
+        }
+        @include mobile_max {
+            top: -35px;
+        }
+    }
+}

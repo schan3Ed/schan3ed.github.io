@@ -1,0 +1,102 @@
+@import './../../helper/_mixins.scss';
+@import './_Cart_Card.scss';
+
+.basket-header {
+    font-family: 'MuseoSans300', 'sans-serif';
+    font-size: 2rem;
+    color: #4c4c4c;
+    @media #{$pc-size} {
+        margin-left: 7.5%;
+    }
+    @media #{$mobile-size} {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    margin-bottom: 1rem;
+}
+
+.btn-basic {
+    position: absolute;
+    transform: translate(-50%, -130%);
+    top: 100%;
+    left: 3.5rem;
+    button {
+        -webkit-appearance: none;
+        padding: 0 0.8rem;
+        margin-right: 0.5rem;
+        border-radius: 0.5rem;
+        height: 1.5rem;
+        background-color: #ef594f;
+        width: 5rem;
+        color: white;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+}
+
+.basket-total-purchase {
+    font-family: 'MuseoSans300', 'sans-serif';
+    font-size: 1.2rem;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    color: #4c4c4c;
+}
+
+.baskets-container {
+    font-family: 'MuseoSans300', 'sans-serif';
+    background-size: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 230px;
+    width: 100%;
+    @include sideBar;
+    margin-top: 112px;
+    @include flexScale(0, 549px) {
+        margin-top: 56px;
+        margin-bottom: 100px;
+    }
+    .btn-primary {
+        border: none;
+        background: none;
+    }
+
+    .empty-text {
+        display: flex;
+        margin: auto;
+        .text {
+            opacity: 0.6;
+            margin-top: -100px;
+            @include mobile_max {
+                font-size: 1.5em;
+                margin-top: -40px;
+            }
+        }
+    }
+}
+
+.button-submit {
+    position: relative;
+    margin: 1rem 0 0rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+        background-color: #3DD28F;
+        color:#fff;
+        text-transform: none;
+    }
+}
+
+.baskets-list {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 30px;
+    width: 100%;
+    margin-top: 1%;
+    flex-wrap: wrap;
+}

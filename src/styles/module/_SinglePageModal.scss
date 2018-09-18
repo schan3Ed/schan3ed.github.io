@@ -1,0 +1,129 @@
+@import './../helper/_mixins.scss';
+
+.form-container {
+  height: 100%;
+  width: 100%;
+
+	.deal-form-wrapper {
+		border-radius: 70px;
+		margin-top: 40px;
+		margin-bottom: 80px;
+		margin-left: auto;
+		margin-right: auto;
+		border: none;
+		font-size: 14px;
+		width: 78%;
+		max-width: 600px;
+		min-width: 490px;
+
+		.form__group {
+		  background-color: white;
+		  padding-bottom: auto;
+		  background-size: auto;
+		  width: auto;
+		  padding: 1em;
+		  max-width: 100%;
+
+		  .helper-text {
+			  margin-top: -8px;
+			  margin-bottom: 20px;
+		  }
+
+		  .form__control {
+		  padding: 40px 40px 40px 40px;
+				.unit-label {
+					padding-top: 1.5em;
+					padding-left: 1em;
+				}
+
+			  .checkbox-grid-container {
+			  	position: relative;
+					
+					.label {
+						width: 80%;
+						min-width: 90px;
+						padding-bottom: 10px;
+						margin-right: 0;
+					}
+
+			  	@include flexScale(0,600px) {
+			  		width: 85%;
+			  		min-width: 270px;
+					}
+
+					@include flexScale(0,400px) {
+						// width: 100%;
+						.label {
+							width: 85%;
+						}
+					}
+			  }
+		  }
+
+		  @include flexScale(0,400px) {
+		  	padding: 0px;
+		  	.form__control {
+			  	transform: scale(0.9);
+			  	padding: 0;		  		
+		  	}
+			}
+		}
+
+		@include flexScale(0,549px) {
+			margin-top: 0;
+		}
+
+		@include flexScale(0,530px) {
+			width: 100%;
+			min-width: 0px;
+		}
+	}
+
+	.btn-submit-sign {
+		margin-top: 1.7rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+	  	button {
+	    	height: 2.5rem;
+	    	width: 120px;
+	    	color: white;
+			font-size: 0.9rem;
+			text-transform: none;
+			&.logout-web-ft {
+				margin-top: 40px;
+				max-height: 35px;
+				min-height: 35px;
+				padding: 0;
+				color: #000;
+				text-decoration: underline;
+				font-size: 1.3em;
+				opacity: 0.8;
+			}
+			&.logout-mobil-ft {
+				display: none;
+			}
+		}
+
+		.notice {
+			margin-top: 10px;
+			max-width: 230px;
+			text-align: center;
+			font-size: 0.9em;
+			opacity: 0.6;
+		}
+
+		@include flexScale(0,530px) {
+			button.action {
+				border-bottom-left-radius: 34px !important;
+				border-bottom-right-radius: 34px !important;
+			}
+			button.logout-web-ft {
+				margin-top: 30px;
+				margin-bottom: 20px;
+			}
+		}
+	}
+}

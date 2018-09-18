@@ -1,0 +1,135 @@
+@import '../helper/_variables.scss';
+
+//Animation
+@mixin keyframe ($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+//Side Bar Breakpoints
+@mixin sideBar {
+    margin-left: $sidebarOpen-width;
+    @include flexScale($sidebar-fixed-min, $sidebar-fixed-max){
+      margin-left: $sidebarClosed-width;
+    }
+    @include flexScale(0,$sidebar-fixed-min - 1px){
+      margin-left: 0;
+    }
+}
+
+
+//Scalability
+//Flex
+@mixin flexScale($min,$max) {
+    @media (min-width: #{$min}) and (max-width: #{$max}) {
+        @content;
+    }
+}
+
+//Mobile
+@mixin mobile_to_tablet {
+    @media (min-width: #{$xs}) and (max-width: #{$sm}) {
+        @content;
+    }
+}
+@mixin mobile_max {
+    @media (max-width: #{$xs}) {
+        @content;
+    }
+}
+@mixin mobile_min {
+    @media (min-width: #{$xs}) {
+        @content;
+    }
+}
+
+//Tablet
+@mixin tablet_to_lg-tablet {
+	@media (min-width: #{$sm}) and (max-width: #{$md}) {
+		@content;
+	}
+}
+@mixin tablet_max {
+    @media (max-width: #{$sm}) {
+        @content;
+    }
+}
+@mixin tablet_min {
+    @media (min-width: #{$sm}) {
+        @content;
+    }
+}
+
+//Large Tablet
+@mixin lg-tablet_to_laptop {
+    @media (min-width: #{$md}) and (max-width: #{$lg}) {
+        @content;
+    }
+}
+@mixin lg-tablet_max {
+    @media (max-width: #{$md}) {
+        @content;
+    }
+}@mixin lg-tablet_min {
+    @media (min-width: #{$md}) {
+        @content;
+    }
+}
+
+//Laptop
+@mixin laptop_to_desktop {
+	@media (min-width: #{$lg}) and (max-width: #{$xl}) {
+		@content;
+	}
+}
+@mixin laptop_max {
+    @media (max-width: #{$lg}) {
+        @content;
+    }
+}@mixin laptop_min {
+    @media (min-width: #{$lg}) {
+        @content;
+    }
+}
+
+//Desktop
+@mixin desktop_max {
+    @media (max-width: #{$xl}) {
+        @content;
+    }
+}
+@mixin desktop_min {
+    @media (min-width: #{$xl}) {
+        @content;
+    }
+}

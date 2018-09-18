@@ -1,0 +1,238 @@
+@import '../helper/_mixins.scss';
+.topbar {
+    position: fixed;
+    padding-left: $sidebarOpen-width;
+    @include flexScale($sidebar-fixed-min, $sidebar-fixed-max) {
+        padding-left: $sidebarClosed-width;
+    }
+    @include flexScale(0, $sidebar-fixed-min - 1px) {
+        padding-left: 0;
+    }
+    z-index: 1;
+    width: 100%;
+    .appbar {
+        background-color: #fff;
+        .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .back-arrow-link {
+                color: #000;
+                .back-arrow {
+                    display: none;
+                    position: absolute;
+                }
+            }
+            .main {
+                margin-top: auto;
+                margin-left: 45px;
+                .icon-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    position: absolute;
+                    right: 0;
+                    margin-right: 30px;
+                    #menuAnchor {
+                        position: absolute;
+                        top: 30px;
+                    }
+                    cursor: pointer;
+                    a {
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    .icon{
+                        font-size: 1em;
+                        color: rgba(0, 0, 0, 0.87);
+                        &.extra{
+                            // position: absolute;
+                        }
+                    }
+                    .badge{
+                        margin-right: 15px;
+                        pointer-events: none;
+                        &.extra{
+                            margin-right: 25px;
+                        }
+
+                        &.hidden {
+                            visibility: hidden;
+                        }
+                    }
+                    .total{
+                        font-size: 0.9em;
+                    }
+                    @include tablet_max {
+                        margin-right: 20px;
+                    }
+                    @include mobile_max {
+                        margin-right: 10px;
+                        .total{
+                            font-size: 0.8em;
+                        }
+                    }
+                }
+            }
+            .subtext {
+                margin-left: 45px;
+                font-size: 1.2em;
+                color: rgb(78, 78, 78);
+            }
+            .button-wrapper {
+                display: flex;
+                z-index: 2;
+                height: 0;
+                width: 100%;
+                @include laptop_min {
+                    padding-right: 405px;
+                }
+                align-items: flex-end;
+                justify-content: flex-end;
+                .button {
+                    bottom: -40px;
+                    text-transform: none;
+                    .icon {
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+        .tabs {
+            margin-left: 69px;
+            min-height: 48px;
+            .breadcrumb {
+                min-width: 0px;
+                opacity: 1;
+            }
+            .tab-item {
+                text-transform: none;
+                @include mobile_max {
+                    font-size: 0.8em;
+                }
+            }
+        }
+        @include tablet_max {
+            .text {
+                .button-wrapper {
+                    display: none;
+                }
+            }
+        }
+        @include flexScale(0, $sidebar-off-max) {
+            .text {
+                flex-direction: row;
+                padding-left: 0;
+                align-items: center;
+                .back-arrow {
+                    &.return {
+                        display: block;
+                        margin-top: -24px;
+                    }
+                }
+                .main {
+                    margin-top: 0;
+                    margin-left: 54px;
+                }
+                .subtext {
+                    display: none;
+                }
+                .button .dev-assist {
+                    position: absolute;
+                    top: 15px;
+                    left: 200px;
+                }
+            }
+            .tabs {
+                display: none;
+                &.mobil-ft {
+                    display: block;
+                    margin: auto;
+                }
+            }
+            .web-ft {
+                display: none;
+            }
+        }
+    }
+}
+
+.bottom-Appbar {
+    display: none;
+    .invisible {
+        cursor: default;
+        pointer-events: none;
+        margin-left: 3vw;
+    }
+    .squish {
+        cursor: default;
+        pointer-events: none;
+        padding: 0 !important;
+    }
+}
+.notification-menu {
+    div:nth-child(2) {
+        top: 56px !important;
+    }
+    .notification-container {
+        display: flex;
+        height: auto !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        .notification-item {
+            display: flex;
+            width: 100%;
+            // padding-bottom: 0 !important;
+            .avatar {
+                margin-left: -10px;
+                margin-right: 10px;
+            }
+            .text-wrapper {
+                margin-right: auto;
+                width: 100%;
+                .heading {
+                    display: flex;
+                    justify-content: space-between;
+                    .subject {
+                        padding-right: 8px;
+                        text-decoration: none !important;
+                        white-space: normal;
+                    }
+                    .time {
+                        text-decoration: none !important;
+                        white-space: normal;
+                    }
+                }
+                .message {
+                    text-decoration: none !important;
+                    white-space: normal;
+                    font-size: 0.8em;
+                }
+            }
+            .closeicon {
+                margin: 0;
+                margin-left: 20px;
+                margin-right: -7px;
+            }
+        }
+    }
+    .notificaiton-action{
+        display: flex;
+        min-width: 400px;
+        justify-content: flex-end;
+        .clear-button {
+            margin: auto;
+            width: 108px;
+            height: 37px;
+        }
+    }
+}
+
+@include flexScale(0, 549px) {
+    .bottom-Appbar {
+        display: block;
+    }
+    .notification-menu {
+        .notificaiton-action{
+            min-width: 80vw;
+        }
+    }
+}

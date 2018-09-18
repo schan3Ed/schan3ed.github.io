@@ -1,0 +1,36 @@
+@import './../../helper/_mixins.scss';
+@import '_ViewShelf_Card.scss';
+@import '_ViewShelf_Modal.scss';
+
+.deals-container {
+  font-family: 'MuseoSans300', 'sans-serif';
+
+  .add-deal-btn-container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 2rem;
+
+    .add-deal-btn {
+      margin: 0 2rem 0 auto;
+    }
+  }
+
+  .tool-tip-container {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+  }
+
+  @include tablet_max {
+    .add-deal-btn-container {
+      display: none;
+    }
+  }
+
+  @include tablet_min {
+    .tool-tip-container {
+      display: none;
+    }
+  }
+}
