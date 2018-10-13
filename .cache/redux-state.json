@@ -339,13 +339,53 @@
       },
       "pathPrefix": "",
       "polyfill": true,
-      "buildTime": "2018-10-13T20:56:53.401Z",
+      "buildTime": "2018-10-13T21:03:48.256Z",
       "id": "Site",
       "parent": "SOURCE",
       "children": [],
       "internal": {
-        "contentDigest": "dcb641311d996d8b80f2fe6a2ebb1637",
+        "contentDigest": "7b63403601b887a1152c72a40b94ef1d",
         "type": "Site",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /App/": {
+      "jsonName": "app-946",
+      "internalComponentName": "ComponentApp",
+      "path": "/App/",
+      "component": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/App.js",
+      "componentChunkName": "component---src-pages-app-js",
+      "context": {},
+      "pluginCreator___NODE": "Plugin gatsby-plugin-page-creator",
+      "pluginCreatorId": "Plugin gatsby-plugin-page-creator",
+      "componentPath": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/App.js",
+      "id": "SitePage /App/",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "402c2bfa7527c52a2c28dbf6eb02eee6",
+        "description": "Plugin gatsby-plugin-page-creator",
+        "owner": "internal-data-bridge"
+      }
+    },
+    "SitePage /": {
+      "jsonName": "index",
+      "internalComponentName": "ComponentIndex",
+      "path": "/",
+      "component": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/index.js",
+      "componentChunkName": "component---src-pages-index-js",
+      "context": {},
+      "pluginCreator___NODE": "Plugin gatsby-plugin-page-creator",
+      "pluginCreatorId": "Plugin gatsby-plugin-page-creator",
+      "componentPath": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/index.js",
+      "id": "SitePage /",
+      "parent": "SOURCE",
+      "children": [],
+      "internal": {
+        "type": "SitePage",
+        "contentDigest": "8d122d6739be4c16a572493238381e8c",
+        "description": "Plugin gatsby-plugin-page-creator",
         "owner": "internal-data-bridge"
       }
     }
@@ -358,7 +398,19 @@
     "nodes": {},
     "connections": {}
   },
-  "jsonDataPaths": {},
-  "components": {},
+  "jsonDataPaths": {
+    "app-946": "788/path---app-946-524-NZuapzHg3X9TaN1iIixfv1W23E",
+    "index": "173/path---index-6a9-NZuapzHg3X9TaN1iIixfv1W23E"
+  },
+  "components": {
+    "/Users/edo/Documents/git/schan3ed.github.io/src/pages/App.js": {
+      "query": "",
+      "componentPath": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/App.js"
+    },
+    "/Users/edo/Documents/git/schan3ed.github.io/src/pages/index.js": {
+      "query": "",
+      "componentPath": "/Users/edo/Documents/git/schan3ed.github.io/src/pages/index.js"
+    }
+  },
   "staticQueryComponents": {}
 }
